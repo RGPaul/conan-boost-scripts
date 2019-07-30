@@ -60,12 +60,12 @@ declare NDK_CLANG_VERSIONS=(
     )
 
 declare ARCH_API_LEVEL=(
-    "armv6:15"
-    "armv7:15"
+    "armv6:19"
+    "armv7:19"
     "armv8:21"
-    "x86:15"
+    "x86:19"
     "x86_64:21"
-    "mips:15"
+    "mips:19"
     "mips64:21"
     )
 
