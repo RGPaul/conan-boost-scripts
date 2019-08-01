@@ -98,7 +98,7 @@ function extractZipArchive()
     cd "${ABSOLUTE_DIR}/conan/lib/${ARCH}"
 
     for file in *.a; do
-        mv $file "../${file%%-*}.a"
+        mv $file "../${file%%-*}"
     done
 
     cd "${ABSOLUTE_DIR}"
