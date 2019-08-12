@@ -20,7 +20,7 @@
 #=======================================================================================================================
 # settings
 
-$LIBRARY_VERSION = "1.68.0"
+$LIBRARY_VERSION = "1.70.0"
 $TARBALL_COMPILER = "msvc14.1"
 $VS_VERSION = 15                  # Visual Studio 15 2017
 
@@ -73,7 +73,7 @@ function ExtractZipArchive($arch, $build_type)
 
 function CreateConanPackage($arch, $build_type, $runtime)
 {
-    & conan export-pkg . Boost/${LIBRARY_VERSION}@rgpaul/stable -s os=Windows `
+    & conan export-pkg . boost/${LIBRARY_VERSION}@rgpaul/stable -s os=Windows `
         -s compiler="Visual Studio" `
         -s compiler.runtime=$runtime `
         -s compiler.version=$VS_VERSION `
@@ -86,7 +86,7 @@ function CreateConanPackage($arch, $build_type, $runtime)
 
 function UploadConanPackages()
 {
-    & conan upload Boost/${LIBRARY_VERSION}@rgpaul/stable -r rgpaul --all
+    & conan upload boost/${LIBRARY_VERSION}@rgpaul/stable -r rgpaul --all
 }
 
 #=======================================================================================================================
