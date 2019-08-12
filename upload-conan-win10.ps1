@@ -28,7 +28,7 @@ $VS_VERSION = 15                  # Visual Studio 15 2017
 # globals
 
 $LIBRARY_TARBALL = "boost-win10-${TARBALL_COMPILER}-mt-s-${LIBRARY_VERSION}.zip"
-$LIBRARY_TARBALL_PATH = "${PSScriptRoot}\${LIBRARY_TARBALL}"
+$LIBRARY_TARBALL_PATH = "${PSScriptRoot}\builds\${LIBRARY_VERSION}\${LIBRARY_TARBALL}"
 $LIBRARY_CONAN_FOLDER = "${PSScriptRoot}\conan"
 
 #=======================================================================================================================
