@@ -23,14 +23,14 @@ set -e
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.70.0
+declare LIBRARY_VERSION=1.71.0
 
 #=======================================================================================================================
 # globals
 
 declare ABSOLUTE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-declare MACOS_SDK_VERSION=$(xcodebuild -showsdks | grep macosx | awk '{print $4}' | sed 's/[^0-9,\.]*//g')
+declare MACOS_SDK_VERSION=$(xcodebuild -showsdks | grep " macosx" | awk '{print $4}' | sed 's/[^0-9,\.]*//g')
 
 #=======================================================================================================================
 

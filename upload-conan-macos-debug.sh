@@ -23,7 +23,7 @@ set -e
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.70.0
+declare LIBRARY_VERSION=1.71.0
 
 declare CONAN_USER=rgpaul
 declare CONAN_CHANNEL=stable
