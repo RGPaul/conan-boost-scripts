@@ -34,7 +34,7 @@ declare CONAN_REPOSITORY=rgpaul
 
 declare ABSOLUTE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-declare MACOS_SDK_VERSION=$(xcodebuild -showsdks | grep macosx | awk '{print $4}' | sed 's/[^0-9,\.]*//g')
+declare MACOS_SDK_VERSION=$(xcodebuild -showsdks | grep " macosx" | awk '{print $4}' | sed 's/[^0-9,\.]*//g')
 
 #=======================================================================================================================
 
@@ -44,7 +44,7 @@ function extractZipArchive()
     mkdir "${ABSOLUTE_DIR}/conan"
     
     echo "Extracting boost-macos-sdk${MACOS_SDK_VERSION}-clang-${LIBRARY_VERSION}.zip ..."
-    unzip -q "${ABSOLUTE_DIR}/boost-macos-sdk${MACOS_SDK_VERSION}-clang-${LIBRARY_VERSION}.zip" -d "${ABSOLUTE_DIR}/conan"
+    unzip -q "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-macos-sdk${MACOS_SDK_VERSION}-clang-${LIBRARY_VERSION}.zip" -d "${ABSOLUTE_DIR}/conan"
 }
 
 #=======================================================================================================================

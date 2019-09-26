@@ -38,9 +38,9 @@ function build()
 {
     cd "${ABSOLUTE_DIR}/Apple"
 
-#    ./boost.sh -ios --ios-archs "armv7 armv7s arm64" --min-ios-version "10.0" \
-#               --boost-version ${LIBRARY_VERSION} --no-framework --universal \
-#               --boost-libs "atomic chrono container context coroutine date_time exception filesystem graph iostreams log math program_options random regex serialization system test thread timer type_erasure wave"
+    ./boost.sh -ios --ios-archs "armv7 armv7s arm64 arm64e" --min-ios-version "10.0" \
+               --boost-version ${LIBRARY_VERSION} --no-framework --universal \
+               --boost-libs "atomic chrono container context coroutine date_time exception filesystem graph iostreams log math program_options random regex serialization system test thread timer type_erasure wave"
 
     rm -rf "${ABSOLUTE_DIR}/Apple/build/boost/${LIBRARY_VERSION}/ios/release/prefix/lib"
     mv "${ABSOLUTE_DIR}/Apple/build/boost/${LIBRARY_VERSION}/ios/release/build/universal" "${ABSOLUTE_DIR}/Apple/build/boost/${LIBRARY_VERSION}/ios/release/prefix/lib"

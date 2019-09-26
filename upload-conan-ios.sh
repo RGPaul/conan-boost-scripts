@@ -49,6 +49,19 @@ function extractZipArchive()
 
 #=======================================================================================================================
 
+function removeArchFromLibraries()
+{
+    cd "${ABSOLUTE_DIR}/conan/lib"
+
+    for file in *.a; do
+        lipo -remove $1 $file -output $file
+    done
+
+    cd "${ABSOLUTE_DIR}"
+}
+
+#=======================================================================================================================
+
 function createConanPackage()
 {
     conan export-pkg . boost/${LIBRARY_VERSION}@${CONAN_USER}/${CONAN_CHANNEL} -s os=iOS \
@@ -73,9 +86,17 @@ function cleanup()
 
 #=======================================================================================================================
 
+declare DEVICE_ARCHS=("armv7" "armv7s" "arm64" "arm64e")
+declare SIMULATOR_ARCHS=("i386" "x86_64")
+
 extractZipArchive
-createConanPackage x86_64
+for arch in ${SIMULATOR_ARCHS[@]}; do removeArchFromLibraries $arch; done
 createConanPackage armv8
+cleanup
+
+extractZipArchive
+for arch in ${DEVICE_ARCHS[@]}; do removeArchFromLibraries $arch; done
+createConanPackage x86_64
 cleanup
 
 uploadConanPackages

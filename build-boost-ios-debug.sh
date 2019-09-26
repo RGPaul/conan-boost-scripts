@@ -38,7 +38,7 @@ function build()
 {
     cd "${ABSOLUTE_DIR}/Apple"
 
-    ./boost.sh -ios --ios-archs "armv7 armv7s arm64" --min-ios-version "10.0" \
+    ./boost.sh -ios --ios-archs "armv7 armv7s arm64 arm64e" --min-ios-version "10.0" \
                --boost-version ${LIBRARY_VERSION} --no-framework --debug --universal \
                --boost-libs "atomic chrono container context coroutine date_time exception filesystem graph iostreams log math program_options random regex serialization system test thread timer type_erasure wave"
 
