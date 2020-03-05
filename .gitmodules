@@ -1,6 +1,6 @@
 [submodule "Apple"]
 	path = Apple
-	url = https://github.com/Manromen/Apple-Boost-BuildScript.git
+	url = https://github.com/RGPaul/Apple-Boost-BuildScript.git
 [submodule "Android"]
 	path = Android
-	url = https://github.com/Manromen/Boost-for-Android.git
+	url = https://github.com/RGPaul/Boost-for-Android.git
