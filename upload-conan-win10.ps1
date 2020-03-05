@@ -20,9 +20,9 @@
 #=======================================================================================================================
 # settings
 
-$LIBRARY_VERSION = "1.70.0"
-$TARBALL_COMPILER = "msvc14.1"
-$VS_VERSION = 15                  # Visual Studio 15 2017
+$LIBRARY_VERSION = "1.72.0"
+$TARBALL_COMPILER = "msvc14.2"
+$VS_VERSION = 16                  # Visual Studio 16 2019
 
 #=======================================================================================================================
 # globals
@@ -42,13 +42,31 @@ function ExtractZipArchive($arch, $build_type)
         # delete unnecessary architectures
         if ($arch.equals("x86"))
         {
-            # for x86 we will delete the x86_64 libraries
+            # for x86 we will delete the x86_64 and arm libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a32-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
         }
         elseif ($arch.equals("x86_64"))
         {
-            # for x86_64 we will delete the x86 libraries
+            # for x86_64 we will delete the x86 and arm libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a32-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
+        }
+        elseif ($arch.equals("armv8_32"))
+        {
+            # for armv8_32 we will delete the x86, x86_64 and armv8 libraries
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
+        }
+        elseif ($arch.equals("armv8"))
+        {
+            # for armv8_32 we will delete the x86, x86_64 and armv8_32 libraries
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
+            Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a32-*.lib"
         }
 
         # delete unnecessary build types
@@ -109,6 +127,18 @@ CreateConanPackage x86_64 Release MT
 Cleanup
 ExtractZipArchive x86_64 Debug
 CreateConanPackage x86_64 Debug MTd
+Cleanup
+ExtractZipArchive armv8 Release
+CreateConanPackage armv8 Release MT
+Cleanup
+ExtractZipArchive armv8 Debug
+CreateConanPackage armv8 Debug MTd
+Cleanup
+ExtractZipArchive armv8_32 Release
+CreateConanPackage armv8_32 Release MT
+Cleanup
+ExtractZipArchive armv8_32 Debug
+CreateConanPackage armv8_32 Debug MTd
 Cleanup
 UploadConanPackages
 
