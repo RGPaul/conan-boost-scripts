@@ -7,7 +7,7 @@ class BoostConan(ConanFile):
                 "android_ndk": "ANY", "android_stl_type":["c++_static", "c++_shared"]}
     default_options = "shared=False", "android_ndk=None"
     description = "Boost is a set of libraries for the C++ programming language."
-    url = "https://github.com/Manromen/conan-boost-scripts"
+    url = "https://github.com/RGPaul/conan-boost-scripts"
     license = "Boost Software License"
 
     def package(self):
