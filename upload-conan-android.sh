@@ -23,7 +23,7 @@
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.71.0
+declare LIBRARY_VERSION=1.72.0
 
 declare CONAN_USER=rgpaul
 declare CONAN_CHANNEL=stable
@@ -31,6 +31,7 @@ declare CONAN_REPOSITORY=rgpaul
 
 # declare all precompiled ndks
 declare ANDROID_NDKS=(
+    "r21"
     "r20"
     "r19c"
     "r18b"
@@ -52,6 +53,7 @@ declare ANDROID_DEPRECATED_ARCHS=(
     )
 
 declare NDK_CLANG_VERSIONS=(
+    "r21:9.0"
     "r20:8.0"
     "r19c:8.0"
     "r18b:7.0"
