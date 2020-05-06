@@ -23,7 +23,7 @@
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.72.0
+declare LIBRARY_VERSION=1.70.0
 
 declare CONAN_USER=rgpaul
 declare CONAN_CHANNEL=stable
@@ -31,12 +31,7 @@ declare CONAN_REPOSITORY=rgpaul
 
 # declare all precompiled ndks
 declare ANDROID_NDKS=(
-    "r21"
-    "r20"
-    "r19c"
-    "r18b"
-    "r17c"
-    "r16b"
+    "r21b"
     )
 
 declare ANDROID_ARCHS=(
@@ -53,6 +48,7 @@ declare ANDROID_DEPRECATED_ARCHS=(
     )
 
 declare NDK_CLANG_VERSIONS=(
+    "r21b:9.0"
     "r21:9.0"
     "r20:8.0"
     "r19c:8.0"
@@ -94,8 +90,8 @@ function extractZipArchive()
     rm -rf "${ABSOLUTE_DIR}/conan" || true
     mkdir "${ABSOLUTE_DIR}/conan"
     
-    echo "Extracting boost-android-${NDK_VERSION}-${ARCH}-${LIBRARY_VERSION}.zip ..."
-    unzip -q "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-android-${NDK_VERSION}-${ARCH}-${LIBRARY_VERSION}.zip" -d "${ABSOLUTE_DIR}/conan"
+    echo "Extracting boost-android-${NDK_VERSION}-${LIBRARY_VERSION}.zip ..."
+    unzip -q "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-android-${NDK_VERSION}-${LIBRARY_VERSION}.zip" -d "${ABSOLUTE_DIR}/conan"
 
     cd "${ABSOLUTE_DIR}/conan/lib/${ARCH}"
 
@@ -103,8 +99,14 @@ function extractZipArchive()
         mv $file "../${file%%-*}"
     done
 
+    cd ..
+    for file in *; do
+        if [[ $file == "x86" ]] || [[ $file == "x86_64" ]] || [[ $file == "armeabi-v7a" ]] || [[ $file == "arm64-v8a" ]]; then
+            rm -rf $file
+        fi
+    done
+
     cd "${ABSOLUTE_DIR}"
-    rm -r "${ABSOLUTE_DIR}/conan/lib/${ARCH}"
 }
 
 #=======================================================================================================================
