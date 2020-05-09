@@ -23,7 +23,7 @@
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION="1.72.0"
+declare LIBRARY_VERSION="1.73.0"
 
 #=======================================================================================================================
 # globals
@@ -122,7 +122,10 @@ function archive()
     echo "Archive ..."
 
     cd "${LIBRARY_INSTALL_FOLDER}"
-    zip -r "${ABSOLUTE_DIR}/boost-debian-${LIBRARY_VERSION}.zip" include lib
+
+    mkdir -p "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}" || true
+
+    zip -r "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-debian-${LIBRARY_VERSION}.zip" include lib
 }
 
 #=======================================================================================================================

@@ -121,7 +121,9 @@ function archive()
 {
     cd "${ABSOLUTE_DIR}/Android/build"
 
-    zip -r "${ABSOLUTE_DIR}/boost-android-${NDK_VERSION}-${LIBRARY_VERSION}.zip" include lib
+    mkdir -p "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}" || true
+
+    zip -r "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-android-${NDK_VERSION}-${LIBRARY_VERSION}.zip" include lib
 
     cd "${ABSOLUTE_DIR}"
 }

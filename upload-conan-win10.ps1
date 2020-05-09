@@ -20,7 +20,7 @@
 #=======================================================================================================================
 # settings
 
-$LIBRARY_VERSION = "1.72.0"
+$LIBRARY_VERSION = "1.73.0"
 $TARBALL_COMPILER = "msvc14.2"
 $VS_VERSION = 16                  # Visual Studio 16 2019
 
@@ -33,36 +33,30 @@ $LIBRARY_CONAN_FOLDER = "${PSScriptRoot}\conan"
 
 #=======================================================================================================================
 
-function ExtractZipArchive($arch, $build_type)
-{
-    if ((test-path $LIBRARY_TARBALL_PATH))
-    {
+function ExtractZipArchive($arch, $build_type) {
+    if ((test-path $LIBRARY_TARBALL_PATH)) {
         Expand-Archive -Path $LIBRARY_TARBALL_PATH -DestinationPath $LIBRARY_CONAN_FOLDER
 
         # delete unnecessary architectures
-        if ($arch.equals("x86"))
-        {
+        if ($arch.equals("x86")) {
             # for x86 we will delete the x86_64 and arm libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a32-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
         }
-        elseif ($arch.equals("x86_64"))
-        {
+        elseif ($arch.equals("x86_64")) {
             # for x86_64 we will delete the x86 and arm libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a32-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
         }
-        elseif ($arch.equals("armv8_32"))
-        {
+        elseif ($arch.equals("armv8_32")) {
             # for armv8_32 we will delete the x86, x86_64 and armv8 libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-a64-*.lib"
         }
-        elseif ($arch.equals("armv8"))
-        {
+        elseif ($arch.equals("armv8")) {
             # for armv8_32 we will delete the x86, x86_64 and armv8_32 libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x32-*.lib"
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-x64-*.lib"
@@ -70,27 +64,23 @@ function ExtractZipArchive($arch, $build_type)
         }
 
         # delete unnecessary build types
-        if ($build_type.equals("Release"))
-        {
+        if ($build_type.equals("Release")) {
             # for the release builds we will delete the debug libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-sgd-*.lib"
         }
-        elseif ($build_type.equals("Debug"))
-        {
+        elseif ($build_type.equals("Debug")) {
             # for the debug builds we will delete the release libraries
             Remove-Item "${LIBRARY_CONAN_FOLDER}\lib\*-s-*.lib"
         }
     }
-    else
-    {
+    else {
         Write-Host "File ${LIBRARY_TARBALL} not existing"
     }
 }
 
 #=======================================================================================================================
 
-function CreateConanPackage($arch, $build_type, $runtime)
-{
+function CreateConanPackage($arch, $build_type, $runtime) {
     & conan export-pkg . boost/${LIBRARY_VERSION}@rgpaul/stable -s os=Windows `
         -s compiler="Visual Studio" `
         -s compiler.runtime=$runtime `
@@ -102,15 +92,13 @@ function CreateConanPackage($arch, $build_type, $runtime)
 
 #=======================================================================================================================
 
-function UploadConanPackages()
-{
+function UploadConanPackages() {
     & conan upload boost/${LIBRARY_VERSION}@rgpaul/stable -r rgpaul --all
 }
 
 #=======================================================================================================================
 
-function Cleanup()
-{
+function Cleanup() {
     Remove-Item -Recurse -Path ${LIBRARY_CONAN_FOLDER}
 }
 

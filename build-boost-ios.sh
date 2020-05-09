@@ -23,7 +23,7 @@ set -e
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.72.0
+declare LIBRARY_VERSION=1.73.0
 
 #=======================================================================================================================
 # globals
@@ -61,7 +61,9 @@ function archive()
 {
     cd "${ABSOLUTE_DIR}/Apple/build/boost/${LIBRARY_VERSION}/ios/release/prefix"
 
-    zip -r "${ABSOLUTE_DIR}/boost-ios-${IOS_SDK_VERSION}-${LIBRARY_VERSION}.zip" include lib
+    mkdir -p "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}" || true
+
+    zip -r "${ABSOLUTE_DIR}/builds/${LIBRARY_VERSION}/boost-ios-${IOS_SDK_VERSION}-${LIBRARY_VERSION}.zip" include lib
 
     cd "${ABSOLUTE_DIR}"
 }
