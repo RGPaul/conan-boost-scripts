@@ -23,7 +23,7 @@
 #=======================================================================================================================
 # settings
 
-declare LIBRARY_VERSION=1.70.0
+declare LIBRARY_VERSION=1.73.0
 
 declare CONAN_USER=rgpaul
 declare CONAN_CHANNEL=stable
@@ -96,7 +96,7 @@ function extractZipArchive()
     cd "${ABSOLUTE_DIR}/conan/lib/${ARCH}"
 
     for file in *.a; do
-        mv $file "../${file%%-*}"
+        mv $file "../${file%%-*}.a"
     done
 
     cd ..
